@@ -1,4 +1,6 @@
 # bashflix
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fastavares%2Fbashflix.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fastavares%2Fbashflix?ref=badge_shield)
+
 
 Watch movies and TV shows on Linux/Mac OS X, with subtitles, instantaneously. Just give the name, quickly grab your popcorn and have fun!
 
@@ -54,3 +56,7 @@ Advanced config: To change default alternative language, change variable *defaul
 # How it works?
 
 It combines [**pirate-get**](https://github.com/vikstrous/pirate-get) for torrent search, with [**peerflix**](https://github.com/mafintosh/peerflix) for torrent streaming, and [**subliminal**](https://github.com/Diaoul/subliminal) for subtitles
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fastavares%2Fbashflix.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fastavares%2Fbashflix?ref=badge_large)
