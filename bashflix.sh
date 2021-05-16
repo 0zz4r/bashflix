@@ -8,6 +8,7 @@ echo -n "
 ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝╚═╝  ╚═╝                                    
 "
 query="$1"
+select=0
 if [ -z "$1" ] || [ "$query" == "-h" ]; then
   echo "Bash script to watch movies and TV shows on Mac OS X and Linux, with subtitles, instantaneously. Just give the name, quickly grab your popcorn and have fun!"
   echo
@@ -24,6 +25,7 @@ if [ -z "$1" ] || [ "$query" == "-h" ]; then
   echo 
   echo "Tips:"
   echo "* Stuck? \"ctrl+c\" and change the search query;"
+  echo "* Want to select a different result? \"bashflix -s\";"
   echo "* Subtitles not synced? Use \"j\" to speed it up or \"h\" to delay it;"
   echo "* Stopping? \"space\" to PAUSE, wait a few minutes and \"space\" to PLAY;"
   echo "* What did I watch? \"bashflix -p\" to see which episode to watch next;"
@@ -31,6 +33,11 @@ if [ -z "$1" ] || [ "$query" == "-h" ]; then
   echo "* From time to time, use \"bashflix -u\" to update bashflix."
   exit 0
 
+fi
+if [ "$query" == "-s" ]; then
+  select=1
+  shift
+  query="$1"
 fi
 if [ "$query" == "-u" ]; then
   $(bash <(curl -fsSL https://raw.githubusercontent.com/0zz4r/bashflix/master/install.sh))
@@ -48,7 +55,12 @@ echo "Searching the best torrent..."
 query="${query#\ }"
 query="${query%\ }"
 query="${query// /.}"
-magnet=$(pirate-get -s SeedersDsc -0 -C 'echo "%s"' "${query}" | tail -n 1)
+if [ $select == 0 ]; then
+  magnet=$(pirate-get -s SeedersDsc -0 -C 'echo "%s"' "${query}" | tail -n 1)
+else  
+  magnet=$(pirate-get -s SeedersDsc -C 'echo "%s"' "${query}" | tail -n 1)
+  magnet="${magnet:2}"
+fi
 if [ -z $magnet ]; then
   echo "Could not find torrent for query ${query}." 
   echo "Please change the query."
